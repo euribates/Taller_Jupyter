@@ -1,0 +1,744 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{03-Mathjax}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Formulas matemáticas (con
+MathJax)}\label{formulas-matemuxe1ticas-con-mathjax}
+
+    \subsection{Fórmulas en línea o en
+bloque}\label{fuxf3rmulas-en-luxednea-o-en-bloque}
+
+Tenemos dos formas de incluir formulas matemáticas, en medio del texto o
+en forma de bloque. Para las formulas incuidas dentro de un texto,
+llamadas en línea o \emph{inline}, se usa \textbf{un caracter
+\texttt{\$}} antes y después de la fórmula. Para un bloque, se usan
+\textbf{dos caracteres \texttt{\$} }.
+
+Veámos el siguiente ejemplo:
+
+\begin{quote}
+La identidad de Euler, \(e^{i\pi} + 1 = 0\) es un caso especial de la
+fórmula desarrollada por Leonhard Euler, notable por relacionar cinco
+números muy utilizados en la historia de las matemáticas y que
+pertenecen a distintas ramas de la misma
+\end{quote}
+
+La expresion \(e^{i\pi} + 1 = 0\) se representa así:
+\texttt{\$e\^{}\{i\textbackslash{}pi\}\ +\ 1\ =\ 0\$.}
+
+Las formulas de bloque se construyen con dos signos de dolar
+\texttt{\$\$}, como en el siguiente ejemplo
+
+\begin{quote}
+Sea \(x\) un número real, la función logaritmo le asigna el exponente o
+potencia \(n\) a la que un número fijo \(b\), llamado \emph{base}, se ha
+de elevar para obtener dicho argumento. Es la función inversa de \(b\) a
+la potencia \(n\). Esta función se escribe como:
+\end{quote}
+
+\begin{quote}
+\[ \log_2 x = n \quad \iff \quad x = n^2 \]
+\end{quote}
+
+Si se accede al contenido de la celda, vemos que la expresión de
+equivalencia se ha redactado así:
+\texttt{\$\$\ \textbackslash{}log\_b\ x\ =\ n\ \textbackslash{}quad\ \textbackslash{}iff\ \textbackslash{}quad\ x\ =\ n\^{}2\ \$\$}.
+
+    \subsection{Letras griegas}\label{letras-griegas}
+
+Podemos usar letras griegas en minúsculas con
+\texttt{\textbackslash{}alpha}, \texttt{\textbackslash{}beta},
+\texttt{\textbackslash{}gamma}, ... \texttt{\textbackslash{}omega}:
+
+\[ alfa: \alpha \] \[ beta: \beta \] \[ gamma: \gamma \] \[ ... \]
+\[ omega: \omega \]
+
+Y en mayúsculas con \texttt{\textbackslash{}Gamma},
+\texttt{\textbackslash{}Delta} ... \texttt{\textbackslash{}Omega}:
+
+\[ Gamma: \Gamma \] \[ Delta: \Delta \] \[ ... \] \[ Omega: \Omega \]
+
+\begin{quote}
+Las letras alfa mayúscula y beta mayúscula no se incluyen porque en
+estos dos casos las formas gráficas son iguales que las letras
+mayúyculas \texttt{A} y \texttt{B} latinas. Pasa lo mismo con épsilon
+\(\epsilon\), micro \(\mu\), etc.
+\end{quote}
+
+    \subsection{Símbolos matemáticos
+habituales}\label{suxedmbolos-matemuxe1ticos-habituales}
+
+Algunos de los símbolos más habituales pueden verse en esta tabla:
+
+\begin{longtable}[c]{@{}llllll@{}}
+\toprule
+Símbolo & Código Latex & Símbolo & Código Latex & Símbolo & Código
+Latex\tabularnewline
+\midrule
+\endhead
+\(\neq\) & \texttt{\textbackslash{}neq} & \(\pm\) &
+\texttt{\textbackslash{}pm} & \(\gets\) &
+\texttt{\textbackslash{}gets}\tabularnewline
+\(\impliedby\) & \texttt{\textbackslash{}impliedby} & \(\implies\) &
+\texttt{\textbackslash{}implies} & \(\to\) &
+\texttt{\textbackslash{}to}\tabularnewline
+\(\leqslant\) & \texttt{\textbackslash{}leqslant} & \(\mp\) &
+\texttt{\textbackslash{}mp} & \(\iff\) &
+\texttt{\textbackslash{}iff}\tabularnewline
+\(\geqslant\) & \texttt{\textbackslash{}leqslant} & \(\times\) &
+\texttt{\textbackslash{}times} & \(\$\) &
+\texttt{\textbackslash{}\$}\tabularnewline
+\(\approx\) & \texttt{\textbackslash{}approx} & \(\div\) &
+\texttt{\textbackslash{}div} & \(\wr\) &
+\texttt{\textbackslash{}wr}\tabularnewline
+\(\equiv\) & \texttt{\textbackslash{}equiv} & \(\cup\) &
+\texttt{\textbackslash{}cup} & \(\cap\) &
+\texttt{\textbackslash{}cap}\tabularnewline
+\(\cong\) & \texttt{\textbackslash{}cong} & \(\simeq\) &
+\texttt{\textbackslash{}simeq} & \(\{\) &
+\texttt{\textbackslash{}\{}\tabularnewline
+\(\in\) & \texttt{\textbackslash{}in} & \(\notin\) &
+\texttt{\textbackslash{}notin} & \(\}\) &
+\texttt{\textbackslash{}\}}\tabularnewline
+\(\partial\) & \texttt{\textbackslash{}partial} & \(\infty\) &
+\texttt{\textbackslash{}infty} & \(\ell\) &
+\texttt{\textbackslash{}ell}\tabularnewline
+\(\subset\) & \texttt{\textbackslash{}subset} & \(\supset\) &
+\texttt{\textbackslash{}supset} & \(\varnothing\) &
+\texttt{\textbackslash{}varnothing}\tabularnewline
+\(\subseteq\) & \texttt{\textbackslash{}subseteq} & \(\supseteq\) &
+\texttt{\textbackslash{}supseteq} & \(\S\) &
+\texttt{\textbackslash{}S}\tabularnewline
+\(\vee\) & \texttt{\textbackslash{}vee} & \(\wedge\) &
+\texttt{\textbackslash{}wedge} & \(\cdot\) &
+\texttt{\textbackslash{}cdot}\tabularnewline
+\(\forall\) & \texttt{\textbackslash{}forall} & \(\exists\) &
+\texttt{\textbackslash{}exists} & \(\ast\) &
+\texttt{\textbackslash{}ast}\tabularnewline
+\(\checkmark\) & \texttt{\textbackslash{}checkmark} & \(\nabla\) &
+\texttt{\textbackslash{}nabla} & \(\aleph\) &
+\texttt{\textbackslash{}aleph}\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsection{Superíndices y
+subíndices}\label{superuxedndices-y-subuxedndices}
+
+Para los superíndices se usa el caracter \texttt{\^{}} y para subíndices
+\texttt{\_}. Por ejemplo \texttt{x\_i\^{}2} se vería así:
+
+\[ x_i^2 \]
+
+y \texttt{\textbackslash{}log\_2\ x} así:
+
+\[ \log_2 x \]
+
+    \subsection{Grupos}\label{grupos}
+
+Los superíndices, los subíndices y otras operaciones que veremos sólo se
+aplican al siguiente \emph{grupo}, entendiendo por grupo o bien un solo
+caracter o una expresión entre llaves (\{ ... \}). POr ejemplo, si
+queremos expresar la potencia vigesimo cuarta de 2, la expresión
+\texttt{2\^{}24} no nos dará lo esperado:
+
+\[ 2^24 \]
+
+Para conseguir lo que queremos hay que expresar el exponente como un
+grupo con llaves, es decir \texttt{2\^{}\{24\}}:
+
+\[ 2^{24} \]
+
+También se pueden añadir llaves para delimitar el grupo al que el
+subíndice o superíndice debe aplicarse, por ejemplo
+\texttt{\{x\^{}y\}\^{}z}:
+
+\[{x^y}^z \]
+
+es distinto de \texttt{x\^{}\{y\^{}z\}}{]}:
+
+\[x^{y^z} \]
+
+Observese este otro ejemplo, la diferencia entre \texttt{x\_i\^{}2} y
+\texttt{x\_\{i\^{}2\}}:
+
+\[ x_i^2 \] \[ x_{i^2} \]
+
+    \subsection{Paréntesis}\label{paruxe9ntesis}
+
+Se pueden usar sin problemas los signos de paréntesis: \texttt{(} y
+\texttt{)} y corchetes: \texttt{{[}} y \texttt{{]}}, pero para usar las
+llaves de forma literal hay que escaparlas: '\{' y '\}'.
+
+El problema es que estos caracteres no escalan proporcionalmente a la
+expresión que haya en su interior, así que si se escribe
+\texttt{(\textbackslash{}frac\{\textbackslash{}sqrt\ x\}\{y\^{}3\})},
+los paréntesis serán demasiado pequeños:
+
+\[ (\frac{\sqrt x}{y^3}) \]
+
+Para evitarlo se pueden usar las expresiones
+\texttt{\textbackslash{}left(} y \texttt{\textbackslash{}right)}, que si
+se adaptan dinámicamente a su contenido:
+
+\[ \left(\frac{\sqrt x}{y^3}\right) \]
+
+También podemos usar a los corchetes (\texttt{\textbackslash{}left{[}} y
+\texttt{\textbackslash{}right{]}}):
+
+\[ \left[ \left(\frac{\sqrt x}{y^3}\right) \alpha^2 \right] \]
+
+    \subsection{Sumatorios e integrales}\label{sumatorios-e-integrales}
+
+Para obtener expresiones de sumatorios e integrales, se usan
+respectivamente \texttt{\textbackslash{}sum} e
+\texttt{\textbackslash{}int}. El subíndice será el límite inferior y el
+superíndice el límite superior. Por ejemplo:
+\texttt{\textbackslash{}sum\_1\^{}n} equivale a:
+
+\[ \sum_1^n \]
+
+Como vimos antes, hay que agrupar con llaves si los límites contienen
+más de un símbolo, por ejemplo
+\texttt{\textbackslash{}int\_\{i=0\}\^{}\textbackslash{}infty\ i\^{}2}
+sería:
+
+\[ \int_{i=0}^\infty i^2 \]
+
+Otras posibilidades son \texttt{\textbackslash{}prod} \(\prod\),
+\texttt{\textbackslash{}bigcup} \(\bigcup\),
+\texttt{\textbackslash{}bigcap} \(\bigcap\) e \(`\iint`\).
+
+    \subsection{Fracciones}\label{fracciones}
+
+Hay dos formas de representar fracciones:
+\texttt{\textbackslash{}frac\ ab} se aplica a los dos grupos siguientes:
+
+\[\frac ab\]
+
+Si las espresiones del numerador o denominador son más complejas, las
+podemos agrupar con las llaves, por ejemplo
+\texttt{\textbackslash{}frac\{a+1\}\{b-1\}} resulta en:
+
+\[ \frac {a+1} {b-1} \]
+
+La otra forma es habitual para expresiones más complicadas, usando
+\texttt{\textbackslash{}over} se puede dividir un grupo para formar la
+fracción, por ejemplo, la expresión anterior con over sería
+\texttt{\{a+1\textbackslash{}over\ b-1\}}, que se vería:
+
+\[ {a+1\over b-1} \]
+
+    \subsection{\texorpdfstring{Tipografías
+(\emph{fonts})}{Tipografías (fonts)}}\label{tipografuxedas-fonts}
+
+Existen varias opciones:
+
+\begin{itemize}
+\item
+  Se puede usar \texttt{\textbackslash{}mathbb} o
+  \texttt{\textbackslash{}Bbb} para el estilo \emph{pizarra clásica}:
+  \(\mathbb{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathbf} para tipografia \emph{bold} o negrita:
+  \(\mathbf{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathtt} para tipografía monoespaciada:
+  \(\mathtt{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathfrak} para tipografía \emph{Fraktur} a
+  Germánica: \(\mathfrak{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathrm} para tipografía Roman:
+  \(\mathrm{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathsf} para tipografía \emph{sans-serif}:
+  \(\mathsf{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathcal} para tipografía caligráfica:
+  \(\mathcal{ABC\ldots WXYZ}\)
+\item
+  \texttt{\textbackslash{}mathscr} para tipografía manuscrita o
+  \emph{script}: \(\mathscr{ABC\ldots WXYZ}\)
+\end{itemize}
+
+    \subsection{Raíces}\label{rauxedces}
+
+Usando \texttt{\textbackslash{}sqrt} podemos ajustarnos al contenido,
+como vimos con los paréntesis antes. Con
+\texttt{\textbackslash{}sqrt\{x\^{}3\}} obtenemos:
+
+\[ \sqrt{x^3} \]
+
+Para raices distintas de la raíz cuadrada, usamos corchetes para indicar
+el índice de la raíz, es decir, para la raiz cúbica
+\texttt{\textbackslash{}sqrt{[}3{]}\{\textbackslash{}frac\ \{x\^{}2\}y\}}
+genera:
+
+\[ \sqrt[3]{\frac {x^2}y} \]
+
+Para expresiones complejas, se puede usar la forma
+\texttt{\{...\}\^{}\{1/2\}}, por ejemplo:
+
+\[ {\left(x \sin\phi + z \cos\phi\right)}^{1/2} \]
+
+    \subsection{Funciones especiales}\label{funciones-especiales}
+
+Algunas funciones especiales como lim, sin, max, etc... se escribe
+normalmente con tipografia románica en vez de itálica. Para conseguirlo
+hay que usar \texttt{\textbackslash{}lim}, \texttt{\textbackslash{}sin},
+\texttt{\textbackslash{}max}, etc... Véase la diferencia entre
+\texttt{sin(x)} y \texttt{\textbackslash{}sin(x)}:
+
+\[ sin(x)  \quad | \quad \sin(x) \]
+
+Para los límites, se usa un subíndice para incluir una anotación, como
+en \texttt{\textbackslash{}lim\_\{x\textbackslash{}to\ 0\}}:
+
+\[ \lim_{x\to 0} \]
+
+    \subsection{Acentos especiales}\label{acentos-especiales}
+
+Hay una serie de marcas para añadir acentos especiales a caracteres
+normales. Algunos de los más usados son:
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+Codigo & resultado\tabularnewline
+\midrule
+\endhead
+\texttt{\textbackslash{}tilde\{a\}} & \(\tilde{a}\)\tabularnewline
+\texttt{\textbackslash{}hat\{a\}} & \(\hat{a}\)\tabularnewline
+\texttt{\textbackslash{}check\{a\}} & \(\check{a}\)\tabularnewline
+\texttt{\textbackslash{}vec\{a\}} & \(\vec{a}\)\tabularnewline
+\texttt{\textbackslash{}bar\{a\}} & \(\bar{a}\)\tabularnewline
+\texttt{\textbackslash{}acute\{a\}} & \(\acute{a}\)\tabularnewline
+\texttt{\textbackslash{}grave\{a\}} & \(\grave{a}\)\tabularnewline
+\texttt{\textbackslash{}breve\{a\}} & \(\breve{a}\)\tabularnewline
+\texttt{\textbackslash{}dot\{a\}} & \(\dot{a}\)\tabularnewline
+\texttt{\textbackslash{}ddot\{a\}} & \(\ddot{a}\)\tabularnewline
+\texttt{\textbackslash{}dddot\{a\}} & \(\dddot{a}\)\tabularnewline
+\texttt{\textbackslash{}ddddot\{a\}} & \(\ddddot{a}\)\tabularnewline
+\texttt{\textbackslash{}mathring\{a\}} & \(\mathring{a}\)\tabularnewline
+\texttt{\textbackslash{}boxed\{a\}} & \(\boxed{a}\)\tabularnewline
+\bottomrule
+\end{longtable}
+
+En la tabla se muestran con la letra \texttt{a}, pero se pueden aplicar
+a cualquier letra
+
+    \subsection{Puntos suspensivos}\label{puntos-suspensivos}
+
+Se puede user \texttt{\textbackslash{}ldots} para obtener puntos como en
+
+\[ a_1, a_2, \ldots, a_n \]
+
+O usar \texttt{\textbackslash{}cdots} para obtener:
+
+\[ a_1+a_2+\cdots+a_n \]
+
+    \subsection{Resaltar ecuaciones}\label{resaltar-ecuaciones}
+
+Si queremos resaltar una ecuación podemos usar
+\texttt{\textbackslash{}dbox}, de forma que:
+
+\begin{verbatim}
+$$ \bbox[yellow]
+{
+e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)
+}
+$$
+\end{verbatim}
+
+Produce:
+
+\[ \bbox[yellow,5px]
+{
+e^x=\lim_{n\to\infty} \left( 1+\frac{x}{n} \right)^n \qquad (1)
+}
+\]
+
+    \subsection{Matrices}\label{matrices}
+
+Usando
+\texttt{\textbackslash{}begin\{matrix\}\ ...\ \textbackslash{}end\{matrix\}}
+podemos incluir una matriz. Para separar las columnas se debe usar el
+caracter \texttt{\&} y para separar las filas se usan dos barras
+invertiddas \texttt{\textbackslash{}\textbackslash{}}. Por ejemplo:
+
+\begin{verbatim}
+\begin{matrix}
+1 & x & x^2 \\
+1 & y^2 & y^2 \\
+1 & z & z^2 \\
+\end{matrix}
+\end{verbatim}
+
+Produce:
+
+\[
+    \begin{matrix}
+    1 & x & x^2 \\
+    1 & y^2 & y^2 \\
+    1 & z & z^2 \\
+    \end{matrix}
+\]
+
+Los espacios se ajustaran de forma automática. Si queremos podemos
+añadir paréntesis, corchetes o llaves usando las expresiones que vimos
+en un apartado anterior, o usando, en vez de \texttt{matrix},
+\texttt{pmatrix} para paréntesis, \texttt{bmatrix} para corchetes,
+\texttt{Bmatrix} para llaves, \texttt{vmatrix} para barras y
+\texttt{Vmatrix} para doble barra.
+
+Puedes usar \texttt{\textbackslash{}cdots} \(\cdots\),
+\texttt{\textbackslash{}ddots} \(\ddots\) y
+\texttt{\textbackslash{}vdots} \(\vdots\) para omitir partes de la
+matriz.
+
+\[
+\begin{vmatrix}
+1      & a_1    & a_1^2  & \cdots & a_1^n  \\
+1      & a_2    & a_2^2  & \cdots & a_2^n  \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1      & a_m    & a_m^2  & \cdots & a_m^n  \\
+\end{vmatrix}
+\]
+
+    \subsection{Incluir Latex}\label{incluir-latex}
+
+Podemos usar el comando magico \%\%latex para incluir código Latex puro
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZpc{}\PYZpc{}latex}
+        \PY{k}{\PYZbs{}begin}\PY{n+nb}{\PYZob{}}align\PY{n+nb}{\PYZcb{}}
+        \PY{k}{\PYZbs{}nabla} \PY{k}{\PYZbs{}times} \PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}B\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}} \PYZhy{}\PY{k}{\PYZbs{},} \PY{k}{\PYZbs{}frac}1c\PY{k}{\PYZbs{},} \PY{k}{\PYZbs{}frac}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}partial}\PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}E\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}partial} t\PY{n+nb}{\PYZcb{}} \PY{n+nb}{\PYZam{}} = \PY{k}{\PYZbs{}frac}\PY{n+nb}{\PYZob{}}4\PY{k}{\PYZbs{}pi}\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZob{}}c\PY{n+nb}{\PYZcb{}}\PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}j\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}} \PY{k}{\PYZbs{}\PYZbs{}}
+        \PY{k}{\PYZbs{}nabla} \PY{k}{\PYZbs{}cdot} \PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}E\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}} \PY{n+nb}{\PYZam{}} = 4 \PY{k}{\PYZbs{}pi} \PY{k}{\PYZbs{}rho} \PY{k}{\PYZbs{}\PYZbs{}}
+        \PY{k}{\PYZbs{}nabla} \PY{k}{\PYZbs{}times} \PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}E\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}}\PY{k}{\PYZbs{},} +\PY{k}{\PYZbs{},} \PY{k}{\PYZbs{}frac}1c\PY{k}{\PYZbs{},} \PY{k}{\PYZbs{}frac}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}partial}\PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}B\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}partial} t\PY{n+nb}{\PYZcb{}} \PY{n+nb}{\PYZam{}} = \PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}0\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}} \PY{k}{\PYZbs{}\PYZbs{}}
+        \PY{k}{\PYZbs{}nabla} \PY{k}{\PYZbs{}cdot} \PY{k}{\PYZbs{}vec}\PY{n+nb}{\PYZob{}}\PY{k}{\PYZbs{}mathbf}\PY{n+nb}{\PYZob{}}B\PY{n+nb}{\PYZcb{}}\PY{n+nb}{\PYZcb{}} \PY{n+nb}{\PYZam{}} = 0
+        \PY{k}{\PYZbs{}end}\PY{n+nb}{\PYZob{}}align\PY{n+nb}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{align}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} & = \frac{4\pi}{c}\vec{\mathbf{j}} \\
+\nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} & = 0
+\end{align}
+
+    
+    \subsection{Referencias y recursos}\label{referencias-y-recursos}
+
+\begin{itemize}
+\item
+  Este resumen sacada de Stack Overflow
+  \href{https://math.meta.stackexchange.com/questionsa/5020/mathjax-basic-tutorial-and-quick-reference}{Mathjax
+  basic tutorial and quick reference}
+\item
+  \href{http://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Typesetting\%20Equations.html}{Ejemplos
+  de la documentación de Jupyter}
+\item
+  \href{http://detexify.kirelabs.org/classify.html}{Detexify} te permite
+  dibujar un símbolo en una página web y te muestra los símbolos TeX que
+  más se le parecen. No obstante, Mathjax no soporta todo el conjunto de
+  caracteres que soporta TeX. Pero es un buen punto para empezar.
+\item
+  MathJax.org mantienen
+  \href{http://docs.mathjax.org/en/latest/tex.html\#supported-latex-commands}{una
+  lista de ordenes LATEX soportadas}.
+\item
+  La página de la doctora Carol J.V. FISHER BURNS sobre
+  \href{http://www.onemathematicalcat.org/MathJaxDocumentation/TeXSyntax.htm}{ordenes
+  tex disponibles en MathJax} es muy completa.
+\item
+  Latex tiene muchos más símbolos dispobibles; se puede consultar un
+  listado abreviado aqui: \url{http://pic.plover.com/MISC/symbols.pdf}
+\item
+  Y otros mucho más extenso en:
+  \url{http://library.caltech.edu/etd/symbols-a4.pdf}
+\end{itemize}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
