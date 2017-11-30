@@ -1,0 +1,8 @@
+- Tema 1: Introducción al uso de Jupyter Notebook.
+- Tema 2: Ejemplos en Python, Julia y R.T
+- Tema 3: Celdas de resultados. Tablas. Gráficas.
+- Tema 4: Numpy para computación científica.
+- Tema 5: Pandas para análisis de datos y BigData.
+- Tema 6: Estructura interna y capacidad de expansión.
+- Tema 7: Paralelismo. Publicación y compartición.
+- Tema 8: Ejemplos en Big Data y Machine Learning.  
